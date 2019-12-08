@@ -1,3 +1,5 @@
+import itertools
+
 # https://rosettacode.org/wiki/Universal_Turing_machine#Python
 def run(state=None, blank=None, rules=[], tape=[], halt=None, pos=0):
     st = state
@@ -36,6 +38,49 @@ def run(state=None, blank=None, rules=[], tape=[], halt=None, pos=0):
                 tape.append(blank)
         st = s1
     return tape
+
+
+def binary_machines(n):
+    """The number of possible n-state, binary Turing machines."""
+    return (4 * n + 2) ** (2 * n)
+
+
+def enumerate_instructions(states):
+    """Yields all possible transitions for an n-state machine."""
+    for state in reversed(["Z"] + list(range(states))):
+        for symbol in [0, 1]:
+            for move in [-1, 1]:
+                yield (symbol, move, state)
+
+
+def enumerate_transitions(states):
+    """Generate all possible transition functions."""
+    for i in itertools.product(enumerate_instructions(states), repeat=states * 2):
+        trans = {}
+        n = 0
+        if len(i) > states:
+            for state in range(states):
+                for symbol in [0, 1]:
+                    trans[(state, symbol)] = i[n]
+                    n += 1
+        yield trans
+
+
+def enumerate_utms(n=1):
+    total = (4 * n + 2) ** (2 * n)
+    print(
+        "Total number of unique rulesets for {n} state, 2 symbol TM: {total} \n".format(
+            n=n, total=total
+        )
+    )
+
+    # Define positional arguments for ruleset string
+    halt = "halt"
+    state = "a"
+    blank = "0"
+    rules = ""
+    for i in range(total):
+        print("The {i} UTM has parameters: \n".format(i=i))
 
 
 if __name__ == "__main__":
