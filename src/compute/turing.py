@@ -39,6 +39,8 @@ def run(state=None, blank=None, rules=[], tape=[], halt=None, pos=0):
         st = s1
     return tape
 
+def batch_run():
+    """Runner for batches of tasks, taken from the cpp implementation: https://www.algorithmicdynamics.net/software.html"""
 
 def binary_machines(n):
     """The number of possible n-state, binary Turing machines."""
@@ -63,7 +65,7 @@ def enumerate_transitions(states):
                 for symbol in [0, 1]:
                     trans[(state, symbol)] = i[n]
                     n += 1
-        yield trans
+        return trans
 
 
 def enumerate_utms(n=1):
@@ -140,4 +142,5 @@ if __name__ == "__main__":
             ],
         ),
     )
+    print(enumerate_transitions(2))
 
