@@ -66,9 +66,11 @@ def enumerate_transitions(states):
                     trans[(state, symbol)] = i[n]
                     n += 1
         return trans
-
+def total_utms(states=1):
+    return (4 * states + 2) ** (2 * states)
 
 def enumerate_utms(n=1):
+
     total = (4 * n + 2) ** (2 * n)
     print(
         "Total number of unique rulesets for {n} state, 2 symbol TM: {total} \n".format(

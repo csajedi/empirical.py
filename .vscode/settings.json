@@ -1,3 +1,4 @@
 {
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "python.pythonPath": "/home/cameron/.local/share/virtualenvs/empirical.py-mjlT7vQd/bin/python"
 }

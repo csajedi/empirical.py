@@ -53,3 +53,10 @@ def test_nsorting():
             )
         )
     assert(tape == [TODO])
+
+def test_enumerations():
+    print("testing enumerations: ")
+    assert(utm.enumerate_utms(1) == 72)
+    assert(utm.enumerate_utms(2) == 20000)
+    assert(utm.enumerate_utms(3) == 15059072)
+    assert(utm.enumerate_utms(4) == 22039921152)
